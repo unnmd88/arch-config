@@ -1,0 +1,88 @@
+#### Старт
+# sudo pacman -Syu git firefox konsole veracrypt dolphin git
+
+#### VPN ####
+#sudo pacman -S openvpn networkmanager-openvpn network-manager-applet
+
+Смена владельца и достпуп:
+#sudo chown -R openvpn:network /etc/openvpn/client /etc/openvpn/server
+#sudo chmod 777 /etc/openvpn
+Скопировать в /etc/openvpn/client .ovpn конфиг
+
+Загрузка, сборка и установка yay
+# ~ git clone https://aur.archlinux.org/yay.git
+# ~ cd yay/
+# ~ makepkg -si
+Установка google-chrom
+# yay -S google-chrome
+
+Изменение кодировки
+iconv -f ИСХОДНАЯ_КОДИРОВКА -t UTF-8 -o новый-файл исходный-файл
+
+# sudo pacman -S virtualbox
+
+#разрешение зависимостей...
+#:: Найдено 3 поставщика для VIRTUALBOX-HOST-MODULES:
+#:: Repository extra
+#   1) virtualbox-host-dkms  2) virtualbox-host-modules-arch  3) virtualbox-host-modules-lts
+Введите число (по-умолчанию=1): 2
+
+#sudo pacman -S virtualbox-guest-iso
+[auserw@auserw]$ uname -r
+6.17.1-arch1-1
+
+#sudo modprobe vboxdrv
+#sudo usermod -aG vboxusers $USER
+#sudo usermod -aG vboxusers auserw
+#sudo systemctl enable --now vboxweb.service
+
+Далее возникла ошибка виртуализации в самом vbox. Сделал следующее:
+#sudo modprobe -r kvm_amd
+
+Установка jetbrains-toolbox
+# yay -S jetbrains-toolbox
+
+Установка outline-client-appimage
+# yay -S outline-client-appimage
+# chmod +x Outline-Client.AppImage
+# ./Outline-Client.AppImage
+
+Установка zsh
+# sudo pacman -S zsh
+# chsh -s /full/path/to/shell
+# source ~/.zshrc
+
+Установка oh-my-zsh
+via curl:
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+via wget:
+# sh -c "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+Download zsh-autosuggestions by
+git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions
+
+Download zsh-syntax-highlighting by
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+
+Append zsh-autosuggestions & zsh-syntax-highlighting to plugins() like this
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+Reopen terminal
+
+# SSH Github
+# Инструкция https://sendel.ru/posts/https-to-ssh-on-github/?ysclid=mh0lu2ct6z926284477
+1. Сгенерировать пару ключей, если еще нет в системе.
+#~ ssh-keygen -t ed25519
+2. Для того чтобы ключ использовался системой, необходимо добавить ключ в ssh-agent.
+#~ eval "$(ssh-agent -s)"
+3. Результат, номер процесса может отличаться:
+# Agent pid 595
+4. Добавьте ранее созданный ключ:
+#~ ssh-add ~/.ssh/id_ed25519
+5. Добавить содержимое файла публичного ключа .pub в gihub.
+
+Если origin подключен как https, то сначала необходимо его удалить.
+#~ git remote rm origin
+И добавить ssh
+#~ git remote add origin git@github.com:unnmd88/arch-config.git
+Проверить список репозиториев
+# git remote -v
+
