@@ -85,4 +85,13 @@ Reopen terminal
 #~ git remote add origin git@github.com:unnmd88/arch-config.git
 Проверить список репозиториев
 # git remote -v
-
+Добавлен коннект по ssh для городких swarco
+1. создать файл config  в $HOME/.ssh
+#~ mkdir .ssh/
+#~  touch ./ssh/config
+2. добавить в файл config:
+#Host 10.179.*
+#    Ciphers 3des-cbc,aes128-cbc,3des-cbc,aes192-cbc,aes256-cbc
+#    KexAlgorithms +diffie-hellman-group1-sha1
+#    HostKeyAlgorithms +ssh-rsa
+#    Ciphers +aes128-cbc
